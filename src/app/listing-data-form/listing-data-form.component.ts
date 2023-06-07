@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Listing } from '../types';
 
 @Component({
   selector: 'app-listing-data-form',
@@ -8,9 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./listing-data-form.component.css']
 })
 export class ListingDataFormComponent {
+  @Input() buttonText;
   name: string = '';
   description: string = '';
   price: string = '';
+
+  @Output() = onSubmit = new EventEmitter<Listing>();
 
   constructor(
     private router: Router,
@@ -18,8 +21,12 @@ export class ListingDataFormComponent {
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
-    alert('Creating listing...');
-    this.router.navigateByUrl('/my-listings');
+  onButtonClicked(): void {
+    this.onSubmit.emit({
+      id: null,
+      name: this.name,
+      description: this.description,
+      price: Number(this.price),
+    });
   }
 }
