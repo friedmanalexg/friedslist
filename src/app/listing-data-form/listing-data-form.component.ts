@@ -13,6 +13,7 @@ export class ListingDataFormComponent {
   description: string = '';
   price: string = '';
 
+  // there is some sort of issue here between @Output and onSubmit
   @Output() = onSubmit = new EventEmitter<Listing>();
 
   constructor(
